@@ -16,6 +16,7 @@
 		"mongoose": "^5.5.9",
 		"request": "^2.88.0",
 		"request-promise": "^4.2.4",
+		"swagger-jsdoc": "^3.2.9",
 		"winston": "^3.2.1"
 	},
 	"devDependencies": {

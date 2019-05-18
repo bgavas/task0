@@ -1,14 +1,17 @@
 {
 	"test": {
 		"MONGO_URI": "mongodb://dbUser:dbPassword1@ds249623.mlab.com:49623/getir-case-study",
-		"PORT": 3000
+		"PORT": 3000,
+		"API_URL": "http://localhost:3000"
 	},
 	"development": {
 		"MONGO_URI": "mongodb://dbUser:dbPassword1@ds249623.mlab.com:49623/getir-case-study",
-		"PORT": 3000
+		"PORT": 3000,
+		"API_URL": "http://localhost:3000"
 	},
 	"production": {
 		"MONGO_URI": "mongodb://dbUser:dbPassword1@ds249623.mlab.com:49623/getir-case-study",
-		"PORT": 3000
+		"PORT": 3000,
+		"API_URL": "http://localhost:3000"
 	}
 }

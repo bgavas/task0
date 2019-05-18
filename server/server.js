@@ -13,6 +13,10 @@ const port = process.env.PORT;
 
 // Middlewares
 app.use(bodyParser.json());
+app.use(express.static('public'));
+
+// Initialize swagger
+require('./util/swagger')(app);
 
 // Define routes
 Object.keys(routes).forEach(function (key) {

@@ -29,7 +29,8 @@ module.exports = (req, res, next) => {
         }])
         .then(records => {
 
-            // Log success. In my project, I use Winston package to log
+            // Log success.
+            // In my old projects, I use Winston package to log
             console.log("Records fetched with the filter: " + JSON.stringify(filter, null, 2));
 
             // Return success response
@@ -46,7 +47,8 @@ module.exports = (req, res, next) => {
         })
         .catch(error => {
 
-            // Log error. In my project, I use Winston package to log
+            // Log error.
+            // In my old projects, I use Winston package to log
             console.log("An error occured during fetching records. Error: " + error);
 
             // Return fail response
@@ -59,3 +61,63 @@ module.exports = (req, res, next) => {
 
     
 };
+
+/**
+ * @swagger
+ * definition:
+ *   searchRecord:
+ *     properties:
+ *       startDate:
+ *         type: string
+ *       endDate:
+ *         type: string
+ *       minCount:
+ *         type: integer
+ *       maxCount:
+ *         type: integer
+ *     example: {
+ *       "startDate": "2016-07-01",
+ *       "endDate": "2016-11-01",
+ *       "minCount": 2700,
+ *       "maxCount": 2900
+ *     }
+ */
+
+/**
+ * @swagger
+ * /api/v1/record/search:
+ *   post:
+ *     tags:
+ *       - Record
+ *     description: Get records
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: filter
+ *         description: Search object
+ *         in: body
+ *         schema:
+ *           $ref: '#/definitions/searchRecord'
+ *     responses:
+ *       200:
+ *         description: Records
+ *         schema:
+ *           properties:
+ *             code:
+ *               type: integer
+ *             msg:
+ *               type: string
+ *             records:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 $ref: '#/definitions/record'
+ *       400:
+ *         description: Code = 2000
+ *         schema:
+ *           properties:
+ *             code:
+ *               type: integer
+ *             msg:
+ *               type: string
+ */
