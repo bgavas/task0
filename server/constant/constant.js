@@ -1,4 +1,6 @@
 module.exports = {
+    SUCCESS_CODE: 0,
     FAIL_CODE: 1000,
-    SUCCESS_CODE: 0
+    BAD_FORMATTED_DATE_CODE: 1001,
+    NOT_AN_INTEGER_CODE: 1002
 };

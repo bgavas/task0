@@ -1,20 +1,84 @@
+const moment = require('moment');
 const { Record } = require('./../../../model/record');
-
 const strings = require('./../../../constant/string');
 const constants = require('./../../../constant/constant');
 
 module.exports = (req, res, next) => {
 
-    // Generate filter
+    // Extract fields
+    let { startDate, endDate, minCount, maxCount } = req.body;
+
+    // Empty filter
     let filter = { $and: [] };
+
     // Start date filter
-    if (req.body.startDate) filter.$and.push({ createdAt: { $gt: new Date(req.body.startDate) }});
+    if (startDate) {
+
+        // Valid date
+        if (moment(startDate).isValid()) {
+            // Add startDate filter
+            filter.$and.push({ createdAt: { $gt: new Date(startDate) }});
+        }
+        // Not valid
+        else {
+            return res.status(400).send({
+                code: constants.BAD_FORMATTED_DATE_CODE,
+                msg: strings.BAD_FORMATTED_DATE
+            });
+        }
+
+    }
     // End date filter
-    if (req.body.endDate) filter.$and.push({ createdAt: { $lt: new Date(req.body.endDate) }});
+    if (endDate) {
+
+        // Valid date
+        if (moment(endDate).isValid()) {
+            // Add end date filter
+            filter.$and.push({ createdAt: { $lt: new Date(endDate) }});
+        }
+        // Not valid
+        else {
+            return res.status(400).send({
+                code: constants.BAD_FORMATTED_DATE_CODE,
+                msg: strings.BAD_FORMATTED_DATE
+            });
+        }
+        
+    }
     // Min filter
-    if (req.body.minCount) filter.$and.push({ totalCount: { $gt: parseInt(req.body.minCount) }});
+    if (minCount) {
+
+        // Valid date
+        if (parseInt(minCount)) {
+            // Add minCount filter
+            filter.$and.push({ totalCount: { $gt: parseInt(minCount) }});
+        }
+        // Not valid
+        else {
+            return res.status(400).send({
+                code: constants.NOT_AN_INTEGER_CODE,
+                msg: strings.NOT_AN_INTEGER
+            });
+        }
+        
+    }
     // Max filter
-    if (req.body.maxCount) filter.$and.push({ totalCount: { $lt: parseInt(req.body.maxCount) }});
+    if (maxCount) {
+
+        // Valid date
+        if (parseInt(maxCount)) {
+            // Add maxCount filter
+            filter.$and.push({ totalCount: { $lt: parseInt(maxCount) }});
+        }
+        // Not valid
+        else {
+            return res.status(400).send({
+                code: constants.NOT_AN_INTEGER_CODE,
+                msg: strings.NOT_AN_INTEGER
+            });
+        }
+        
+    }
 
     // Find records
     Record
@@ -54,7 +118,7 @@ module.exports = (req, res, next) => {
             // Return fail response
             return res.status(400).send({
                 code: constants.FAIL_CODE,
-                msg: strings.FAIL_RESPONSE
+                msg: strings.SEARCH_FAIL_MESSAGE
             });
 
         });
