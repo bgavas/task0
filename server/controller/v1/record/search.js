@@ -95,7 +95,7 @@ module.exports = (req, res, next) => {
 
             // Log success.
             // In my old projects, I use Winston package to log
-            console.log("Records fetched with the filter: " + JSON.stringify(filter, null, 2));
+            console.log(records.length + " records fetched with the filter: " + JSON.stringify(filter, null, 2));
 
             // Return success response
             return res.status(200).send({
