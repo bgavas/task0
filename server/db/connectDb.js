@@ -3,7 +3,7 @@ const conn = mongoose.connection;
 
 // Start mongodb connection
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true });
 
 // Database error
 conn.on('error', (err) => {
