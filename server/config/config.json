@@ -11,6 +11,6 @@
 	},
 	"production": {
 		"MONGO_URI": "mongodb://dbUser:dbPassword1@ds249623.mlab.com:49623/getir-case-study",
-		"API_URL": "http://localhost:3000"
+		"API_URL": "https://task0app.herokuapp.com"
 	}
 }
